@@ -19,9 +19,7 @@ import java.util.List;
 public class WorkerResource {
 
     private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
-
     private final Environment environment;
-
     private final WorkerRepository repository;
 
     @Autowired
@@ -29,7 +27,6 @@ public class WorkerResource {
 
         this.repository = repository;
         this.environment = environment;
-
     }
 
     @GetMapping
@@ -38,11 +35,19 @@ public class WorkerResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Worker> findById(@PathVariable Long id){
+    public ResponseEntity<Worker> findById(@PathVariable Long id) {
+
+        /*try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
 
         logger.info("PORT = " + environment.getProperty("local.serve.port"));
 
         Worker obj = repository.findById(id).get();
         return  ResponseEntity.ok(obj);
+
+
     }
 }
