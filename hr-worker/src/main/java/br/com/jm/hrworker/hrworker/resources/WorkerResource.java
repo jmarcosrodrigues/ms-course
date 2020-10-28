@@ -21,12 +21,11 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
 
-    private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
+   // private static Logger logger = LoggerFactory.getLogger(WorkerResource.class);
     private final Environment environment;
     private final WorkerRepository repository;
 
-    @Value("${test.config}")
-    private String testConfig;
+
 
     @Autowired
     public WorkerResource(WorkerRepository repository, Environment environment){
@@ -37,7 +36,7 @@ public class WorkerResource {
 
     @GetMapping(value = "/configs")
     public ResponseEntity<Void> getConfigs(){
-        logger.info("Config = " + testConfig);
+        //logger.info("Config = " + testConfig);
 
         return  ResponseEntity.noContent().build();
 
@@ -57,7 +56,7 @@ public class WorkerResource {
             e.printStackTrace();
         }*/
 
-        logger.info("PORT = " + environment.getProperty("local.serve.port"));
+        //logger.info("PORT = " + environment.getProperty("local.serve.port"));
 
         Worker obj = repository.findById(id).get();
         return  ResponseEntity.ok(obj);
